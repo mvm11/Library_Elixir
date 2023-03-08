@@ -18,7 +18,10 @@ defmodule Publisher.Libraries do
 
   """
   def list_libraries do
-    Repo.all(Library)
+    Library
+    |> preload([:admin])
+    |> preload([:books])
+    |>  Repo.all()
   end
 
   @doc """

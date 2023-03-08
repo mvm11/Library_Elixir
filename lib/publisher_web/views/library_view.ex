@@ -3,7 +3,16 @@ defmodule PublisherWeb.LibraryView do
   alias PublisherWeb.{LibraryView, AdminView, BookView}
 
   def render("index.json", %{libraries: libraries}) do
-    %{data: render_many(libraries, LibraryView, "library.json")}
+    %{data: Enum.map(libraries, &render_library/1)}
+  end
+
+  defp render_library(library) do
+    %{
+      id: library.id,
+      name: library.name,
+      admin: render_one(library.admin, AdminView, "admin.json"),
+      books: render_many(library.books, BookView, "book.json")
+    }
   end
 
   def render("show.json", %{library: library}) do

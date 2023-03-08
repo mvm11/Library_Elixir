@@ -29,7 +29,7 @@ defmodule PublisherWeb.LibraryController do
     library = get_library_by_name(name)
 
     if library !== nil do
-      render(conn, "full_library.json", library: library)
+      render(conn, "show.json", library: library)
     else
       conn |> put_status(404) |> json(%{error: "Publisher not found"})
     end

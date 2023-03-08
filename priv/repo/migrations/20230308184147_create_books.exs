@@ -6,7 +6,8 @@ defmodule Publisher.Repo.Migrations.CreateBooks do
       add :id, :binary_id, primary_key: true
       add :name, :string
       add :author, :string
-      add :library_id, references(:libraries, on_delete: :nothing, type: :binary_id)
+      add :state, :boolean
+      add :library_id, references(:libraries, on_delete: :delete_all, type: :binary_id)
 
       timestamps()
     end

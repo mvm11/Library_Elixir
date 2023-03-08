@@ -7,6 +7,7 @@ defmodule Publisher.Books.Book do
   schema "books" do
     field :author, :string
     field :name, :string
+    field :state, :boolean
     belongs_to :library, Publisher.Libraries.Library
 
     timestamps()
@@ -15,7 +16,7 @@ defmodule Publisher.Books.Book do
   @doc false
   def changeset(book, attrs) do
     book
-    |> cast(attrs, [:library_id, :name, :author])
-    |> validate_required([:library_id, :name, :author])
+    |> cast(attrs, [:library_id, :name, :author, :state])
+    |> validate_required([:library_id, :name, :author, :state])
   end
 end

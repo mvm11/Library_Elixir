@@ -39,4 +39,41 @@ defmodule PublisherWeb.BookController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def lend_book(conn, %{"id" => id}) do
+
+    book = Books.get_book!(id)
+
+    case book do
+      nil ->
+        conn
+        |> put_status(:not_found)
+        |> render("404.html")
+      _ ->
+
+        Books.update_book(book, %{name: book.name, author: book.author, state: true})
+
+        conn
+        |> redirect(to: Routes.book_path(conn, :show, book))
+    end
+  end
+
+  def return(conn, %{"id" => id}) do
+
+    book = Books.get_book!(id)
+
+    case book do
+      nil ->
+        conn
+        |> put_status(:not_found)
+        |> render("404.html")
+      _ ->
+
+        Books.update_book(book, %{author: book.author, name: book.author, state: false})
+
+        conn
+        |> redirect(to: Routes.book_path(conn, :show, book))
+    end
+  end
+
 end

@@ -14,7 +14,8 @@ defmodule PublisherWeb.BookView do
     %{
       id: book.id,
       name: book.name,
-      author: book.author
+      author: book.author,
+      state: book.state
     }
   end
 end

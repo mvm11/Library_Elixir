@@ -29,6 +29,8 @@ defmodule PublisherWeb.Router do
     get "/books/:id", BookController, :show
     post "/books", BookController, :create
     put "/books/:id", BookController, :update
+    put "/books/lend/:id", BookController, :lend_book
+    put "/books/return/:id", BookController, :return
     delete "/books/:id", BookController, :delete
   end
 end
