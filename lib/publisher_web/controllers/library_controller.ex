@@ -28,11 +28,7 @@ defmodule PublisherWeb.LibraryController do
   def show_by_name(conn,  %{"name" => name}) do
     library = get_library_by_name(name)
 
-    if library !== nil do
-      render(conn, "show.json", library: library)
-    else
-      conn |> put_status(404) |> json(%{error: "Publisher not found"})
-    end
+    validate_library(conn, library)
 
   end
 
@@ -65,4 +61,13 @@ defmodule PublisherWeb.LibraryController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def validate_library(conn, library) when library === nil do
+    conn |> put_status(404) |> json(%{error: "Publisher not found"})
+  end
+
+  def validate_library(conn, library) do
+    render(conn, "full_library.json", library: library)
+  end
+
 end

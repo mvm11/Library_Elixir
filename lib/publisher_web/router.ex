@@ -24,7 +24,7 @@ defmodule PublisherWeb.Router do
     put "/admins/:id", AdminController, :update
     delete "/admins/:id", AdminController, :delete
 
-    # Admins routes
+    # Books routes
     get "/books", BookController, :index
     get "/books/:id", BookController, :show
     post "/books", BookController, :create
